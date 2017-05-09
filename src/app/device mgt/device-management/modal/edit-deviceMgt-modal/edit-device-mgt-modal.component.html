@@ -1,0 +1,117 @@
+<div class="modal-header">
+  <h4 class="modal-title">Device SN {{data.device_sn}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="greyarea">
+      <h5 class="text-success">Device Feature</h5>
+      <div><label >status</label>
+        <select class="pull-right" [(ngModel)]="data.status">
+          <option *ngFor="let s of options.status" [value]="s">{{s}}</option>
+        </select>
+      </div>
+      <div><label >location</label>
+        <select class="pull-right" [(ngModel)]="data.location">
+          <option *ngFor="let l of options.location" [value]="l">{{l}}</option>
+        </select></div>
+      <div><label >parent clinic</label>
+        <input class="pull-right" [(ngModel)]="data.parent_clinic">
+      </div>
+      <div><label >sub clinic</label>
+        <input class="pull-right" [(ngModel)]="data.sub_clinic">
+      </div>
+      <div><label >Checked out by</label>
+        <select class="pull-right" [(ngModel)]="data.checked_out_by">
+          <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
+        </select>
+      </div>
+      <div><label >checked out date</label><input class="pull-right" type="text" [(ngModel)]="data.checked_out_date"></div>
+      <p>Or</p>
+      <div><label>checked in by</label>
+        <select class="pull-right" [(ngModel)]="data.checked_in_by">
+          <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
+        </select>
+      </div>
+      <div><label>checked in date</label><input class="pull-right" type="text" [(ngModel)]="data.checked_in_date"></div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+          <h5 class="text-primary">Device Attributes</h5>
+          <div><label >iccid</label><input class="pull-right" type="text" [(ngModel)]="data.iccid"></div>
+          <div><label>imei</label><input class="pull-right" type="text" [(ngModel)]="data.imei"></div>
+          <div><label >model number</label><input class="pull-right"  type="text" [(ngModel)]="data.model_number"></div>
+          <div><label >points to</label>
+            <select class="pull-right" [(ngModel)]="data.points_to">
+              <option *ngFor="let m of options.points_to" [value]="m">{{m}}</option>
+            </select>
+          </div>
+
+        <div>
+            <label >model description</label>
+            <select class="pull-right" [(ngModel)]="data.model_description">
+              <option *ngFor="let m of options.model_description" [value]="m">{{m}}</option>
+            </select>
+          </div>
+
+          <div>
+            <label >manufacturer</label>
+            <select class="pull-right" [(ngModel)]="data.manufacturer">
+              <option *ngFor="let m of options.manufacturer" [value]="m">{{m}}</option>
+            </select>
+          </div>
+        <div>
+          <label >firmware version</label>
+          <select class="pull-right" [(ngModel)]="data.firmware_version">
+            <option *ngFor="let m of options.firmware_version" [value]="m">{{m}}</option>
+          </select>
+        </div>
+        <div><label >zywie logo</label>
+          <select class="pull-right" [(ngModel)]="data.zywie_logo">
+            <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
+          </select>
+        </div>
+          <br>
+          <h5 class="text-primary">SIM Attributes</h5>
+          <div>
+            <label>sim provider</label>
+            <select class="pull-right" [(ngModel)]="data.sim_provider">
+              <option *ngFor="let m of options.sim_provider" [value]="m">{{m}}</option>
+            </select>
+          </div>
+          <div><label>wyless provision_date</label><input class="pull-right" type="text" [(ngModel)]="data.wyless_provision_date"></div>
+          <div><label>use zywie sim</label>
+            <select class="pull-right" [(ngModel)]="data.use_zywie_sim">
+              <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
+            </select>
+          </div>
+      </div>
+      <div class="col">
+        <h5 class="text-primary">Order Atrributes</h5>
+        <div><label>purchase order</label><input class="pull-right" type="text" [(ngModel)]="data.purchase_order"></div>
+        <div><label>registration date</label><input class="pull-right" type="text" [(ngModel)]="data.registration_date"></div>
+        <br>
+        <h5 class="text-info">Test Attributes</h5>
+        <div><label>device test date</label><input class="pull-right" type="text" [(ngModel)]="data.device_test_date"></div>
+        <div><label>device suspend date</label><input class="pull-right" type="text" [(ngModel)]="data.device_suspension_date"></div>
+        <br>
+        <h5 class="text-info">Lease</h5>
+        <div><label>lease</label>
+          <select class="pull-right" [(ngModel)]="data.data">
+            <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
+          </select>
+        </div>
+        <div><label>lease price per month</label><input class="pull-right" type="text" [(ngModel)]="data.lease_price_per_month"></div>
+        <div><label>lease start date</label><input class="pull-right" type="text" [(ngModel)]="data.lease_start_date"></div>
+        <div><label>lease end date</label><input class="pull-right" type="text" [(ngModel)]="data.lease_end_date"></div>
+      </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-secondary col-sm-2" (click)="activeModal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-danger col-sm-2 pull-right" (click)="activeModal.close(data)">Update</button>
+    <br>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" uiSref="public.home">
+    <img id="zywielogo" src="../assets/Zywie%20logo.png" alt="home">
+  </a>
+  <div class="collapse navbar-collapse " id="navbarNavDropdown">
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" uiSref="public.dashboard" uiSrefActive="active">
+          <span class="fa fa-dashboard fa-2x"></span>
+          <br class="hidden-xs">Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  uiSrefActive="active" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fa fa-book fa-2x"></span><br class="hidden-xs">
+          Device Management
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" uiSrefActive="active" uiSref="public.deviceManagement">Device Management</a>
+          <a class="dropdown-item" uiSrefActive="active" uiSref="public.deviceHistory">Device History</a>
+          <a class="dropdown-item" uiSrefActive="active" uiSref="public.deviceInventory">Device Inventory</a>
+          <a class="dropdown-item" uiSrefActive="active" uiSref="public.accessoryInventory">Accessory Inventory</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" uiSref="public.customerManagement" uiSrefActive="active">
+          <span class="fa fa-address-card fa-2x"></span><br class="hidden-xs">
+          Customer Management
+        </a>
+      </li>
+      <li class="nav-item dropdown pull-right">
+        <a class="nav-link dropdown-toggle"  uiSrefActive="active" id="navbarDropdownMenuLink"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fa fa-user-o fa-2x"></span><br class="hidden-xs">
+          User Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" uiSrefActive="active">
+          <a class="nav-link" uiSref="login" >Log Out</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ui-view></ui-view>
+
+<br><br><br><br><br><br>
+
+<footer class="panel-footer">
+  <div class="text-center">
+    &copy; Copyright Zywie 2016 | Developed By Hong
+    <section>
+      12000 Findley Rd
+      Duluth, GA 30096
+      <!--<hr class="visible-xs">-->
+    </section>
+  </div>
+</footer>

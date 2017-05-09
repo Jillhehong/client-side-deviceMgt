@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <br>
+  <div style="width: 900px">
+    <ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-sm-8">-->
+      <!--<ngb-accordion (panelChange)="changeClass($event)">-->
+        <!--<ngb-panel>-->
+          <!--<ng-template ngbPanelTitle>-->
+            <!--<div>-->
+              <!--<strong>filter <i class="pull-right fa"  [ngClass]="{'fa-angle-double-up fa-lg': status, 'fa-angle-double-down fa-lg': !status}"></i></strong>-->
+            <!--</div>-->
+          <!--</ng-template>-->
+          <!--<ng-template ngbPanelContent>-->
+            <!--<form class="form-inline">-->
+              <!--<label class="sr-only" for="device_sn">Device SN</label>-->
+              <!--<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="device_sn" name="device_sn" placeholder="Device SN" [(ngModel)]="search.device_sn">-->
+              <!--<label class="sr-only" for="pclinic">Parent Clinic</label>-->
+              <!--<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="pclinic" name="pclinic" placeholder="Clinic Name" [(ngModel)]="search.parent_clinic">-->
+              <!--<label class="sr-only" for="status">Device Status</label>-->
+              <!--<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="status" name="status" placeholder="Status" [(ngModel)]="search.status">-->
+              <!--<label class="sr-only" for="location">Device Location</label>-->
+              <!--<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="location" name="location" placeholder="Location" [(ngModel)]="search.location">-->
+              <!--<button type="submit" class="btn btn-primary" (click)="filter(search)">Search</button>-->
+            <!--</form>-->
+          <!--</ng-template>-->
+        <!--</ngb-panel>-->
+      <!--</ngb-accordion>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="row">
+    <button type="button" class="btn btn-default btn-sm col-sm-1" (click)="editSelectedData()" [disabled]="checkedOrNot">
+      <i class="fa fa-pencil" aria-hidden="true"></i> Edit Selected
+    </button>
+    <button type="button" class="btn btn-default btn-sm offset-sm-8 col-sm-1"><span class="fa fa-download"></span> Export</button>
+
+
+    <!--filtering in popover-->
+    <ng-template #popContent >
+      <table class="filtering">
+        <tr>
+          <td>Device SN</td>
+          <td><input  type="text"  [(ngModel)]="search.device_sn"></td>
+        </tr>
+        <tr>
+          <td>Parent Clinic</td>
+          <td><input type="text"  [(ngModel)]="search.parent_clinic"></td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td>
+            <select  [(ngModel)]="search.status">
+              <option *ngFor="let s of options.status" [value]="s">{{s}}</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <select  [(ngModel)]="search.location">
+            <option *ngFor="let s of options.location" [value]="s">{{s}}</option>
+          </select>
+        </tr>
+      </table>
+      <br>
+      <button type="button" class="btn btn-default btn-sm" (click)="filter(search)">Search</button>
+    </ng-template>
+    <button type="button" class="btn btn-default btn-sm col-sm-1" [ngbPopover]="popContent" popoverTitle="Filters" placement="left">
+      <span class="fa fa-sort-desc"></span> Filter</button>
+  </div>
+
+
+  <!--table-->
+  <table class="table table-bordered table-hover table-sm table-responsive">
+    <thead>
+      <tr>
+        <th><input type="checkbox" disabled></th>
+        <th (click)="sortNumeric('device_sn')">Device SN<span class="fa fa-sort-desc"></span>
+        </th>
+        <th (click)="sortString('status')">Status<span class="fa fa-sort-desc"></span></th>
+        <th>Checked Out By</th>
+        <th>Checked Out Date</th>
+        <th (click)="sortString('location')">Location<span class="fa fa-sort-desc"></span></th>
+        <th (click)="sortString('parent_clinic')">Parent Clinic<span class="fa fa-sort-desc"></span></th>
+        <th (click)="sortString('sub_clinic')">Sub Clinic<span class="fa fa-sort-desc"></span></th>
+        <th (click)="sortString('physician')">Physician<span class="fa fa-sort-desc"></span></th>
+        <th (click)="sortString('billable')">Billable<span class="fa fa-sort-desc"></span></th>
+      </tr>
+    </thead>
+   <tbody>
+   <tr *ngFor="let item of deviceMgtData | paginate: { itemsPerPage: 20, currentPage: p }; let i=index">
+     <td><input type="checkbox" [value]="i" (change)="checkbox($event)"></td>
+     <td>{{item.device_sn}}</td>
+     <td>{{item.status}}</td>
+     <td>{{item.checked_out_by}}</td>
+     <td>{{item.checked_out_date | date: 'yyyy-MM-dd'}}</td>
+     <td>{{item.location}}</td>
+     <td>{{item.parent_clinic}}</td>
+     <td>{{item.sub_clinic}}</td>
+     <td>{{item.physician}}</td>
+     <td><div [ngStyle]="billableStyle(item.billable)" class="text-center">{{item.billable}}</div></td>
+    </tr>
+   </tbody>
+  </table>
+
+
+  <!--ngx-pagination-->
+  <pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+</div>

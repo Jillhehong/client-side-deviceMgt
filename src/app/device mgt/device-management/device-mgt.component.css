@@ -1,0 +1,20 @@
+.btn-sm {
+  border-radius: 100px;
+}
+/*fa {*/
+  /*background-color: #0a94d6;*/
+/*}*/
+
+/*.popoverDiv {*/
+  /*width: 300px;*/
+  /*text-align: center;*/
+/*}*/
+/*:host >>> .popover {*/
+  /*max-width: 600px;*/
+/*}*/
+
+.filtering input, .filtering select {
+  width: 200px;
+  height:30px;
+  border: 1px solid lightgray;
+}

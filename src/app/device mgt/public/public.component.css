@@ -1,0 +1,13 @@
+#zywielogo {
+  height:45px;
+}
+.panel-footer {
+  position: relative;
+  /*margin-bottom: -150px; !* negative value of footer height *!*/
+  height: 70px;
+  /*clear:both;*/
+  /*padding-top:20px;*/
+
+  background-color: lightgray;
+  color:white;
+}

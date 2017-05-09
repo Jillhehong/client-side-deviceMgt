@@ -1,0 +1,72 @@
+<!--<div class="login-container">-->
+  <!--<div class="login-box">-->
+    <!--<ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>-->
+    <!--<form #loginForm="ngForm">-->
+      <!--<div class="form-group row">-->
+        <!--<label for="email" class="col-sm-3 col-form-label">Email:</label>-->
+        <!--<div class="col-sm-9">-->
+          <!--<input type="text" id="email" name='userEmail' class="form-control" [(ngModel)]="user.email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"-->
+                  <!--placeholder="email" required  #email="ngModel">-->
+          <!--<div *ngIf="email.errors && (email.dirty || email.touched)"-->
+               <!--class="form_msg">-->
+            <!--<div *ngIf="email.errors.required">-->
+              <!--Email is required-->
+            <!--</div>-->
+            <!--<div *ngIf="email.errors.pattern">-->
+              <!--Email format handle@domain-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group row">-->
+        <!--<label for="pwd" class="col-sm-3 col-form-label">Password: <span class="fa fa-key"></span></label>-->
+        <!--<div class="col-sm-9">-->
+          <!--<input  type="password" id="pwd" name="password" class="form-control" [(ngModel)]="user.password"-->
+                  <!--placeholder="password" required #pwd="ngModel">-->
+          <!--<div *ngIf="pwd.errors && pwd.touched">-->
+            <!--<span class="form_msg pull-left"  *ngIf="pwd.errors.required">password is required</span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<button  class="btn btn-danger offset-sm-3 col-sm-9" (ng-click)="submit()" [disabled]="loginForm.form.invalid" >log in</button>-->
+      <!--</div>-->
+      <!--<div class="form-actions">-->
+        <!--<br>-->
+        <!--<a uiSref="signup">Do not have an account, sign up here</a>-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+
+<div class="login-container">
+  <div class="login-box">
+    <ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+    <form #loginForm="ngForm">
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label">Email:</label>
+        <div class="col-sm-9">
+          <input type="text" id="email" name='userEmail' class="form-control" [(ngModel)]="user.email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                 placeholder="email" required  #email="ngModel">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="pwd" class="col-sm-3 col-form-label">Password: <span class="fa fa-key"></span></label>
+        <div class="col-sm-9">
+          <input  type="password" id="pwd" name="password" class="form-control" [(ngModel)]="user.password"
+                  placeholder="password" required #pwd="ngModel">
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit"  class="btn btn-danger offset-sm-3 col-sm-9" (click)="submit(user)" >log in</button>
+      </div>
+      <div class="form-actions">
+        <br>
+        <a uiSref="signup">Do not have an account, sign up here</a>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,57 @@
+
+<div class="container register-box" [hidden]="submitted">
+  <ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+  <form #registerForm='ngForm'>
+    <h3 class="text-center">Registration</h3>
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstNameHelp"
+             placeholder="Your First Name" [(ngModel)]="user.firstName" required #firstName="ngModel">
+      <div *ngIf="firstName.errors && firstName.touched">
+        <span class="form_msg"  *ngIf="firstName.errors && firstName.errors.required">first name is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Your Last Name" aria-describedby="lastNameHelp"
+             [(ngModel)]="user.lastName"  required #lastName="ngModel">
+      <div *ngIf="lastName.errors && lastName.touched">
+        <span class="form_msg"  *ngIf="lastName.errors.required">last name is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email" aria-describedby="emailHelp"
+             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="user.email" required  #email="ngModel">
+      <div *ngIf="email.errors && email.touched">
+        <span class="form_msg "  *ngIf="email.errors.required">last name is required</span>
+        <span class="form_msg "  *ngIf="email.errors.pattern">Must be a valid email address: handle@domain format</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" aria-describedby="pwdHelp"
+             [(ngModel)]="user.pwd"  required #pwd="ngModel">
+      <div *ngIf="pwd.errors && pwd.touched">
+        <span class="form_msg" *ngIf="pwd.errors.required">password is required</span>
+      </div>
+    </div>
+    <!--enter password again-->
+    <div class="form-group">
+      <label for="pwd2">Confirm Password:</label>
+      <input type="password" class="form-control" name="pwd2" id="pwd2" placeholder=" Confirm Password"  aria-describedby="pwd2Help"
+             [(ngModel)]="user.pwd2"  required #pwd2="ngModel">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success" (click)="submit(user)" [disabled]="registerForm.form.invalid">sign up</button>
+    </div>
+  </form>
+  <br>
+  <a uiSref="login">Already have an account, sign in here!</a>
+  <br><br><br>
+</div>
+
+<div [hidden]="!submitted">
+  <h2>Thank you, you have successfully submitted!</h2>
+  <a uiSref="login">log in here...</a>
+</div>

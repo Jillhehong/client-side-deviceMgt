@@ -1,0 +1,20 @@
+.login-container {
+  width: 438px;
+  margin-left: 30%;
+  margin-top:100px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.login-box {
+  padding: 29px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+

@@ -1,0 +1,14 @@
+/*div label, div input {*/
+  /*display: inline-block;*/
+/*}*/
+input, select {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  width: 200px;
+  height:25px;
+}
+.greyarea {
+  background-color: lightgray;
+  width: 500px;
+  text-align: center;
+}
