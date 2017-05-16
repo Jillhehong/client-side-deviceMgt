@@ -6,36 +6,51 @@
 </div>
 <div class="modal-body">
   <div class="container">
+    <div *ngIf="error" class="text-danger">{{error}}</div>
     <div class="greyarea">
       <h5 class="text-success">Device Feature</h5>
       <div><label >status</label>
         <select class="pull-right" [(ngModel)]="data.status">
+          <option value=""></option>
           <option *ngFor="let s of options.status" [value]="s">{{s}}</option>
         </select>
       </div>
       <div><label >location</label>
         <select class="pull-right" [(ngModel)]="data.location">
+          <option value=""></option>
           <option *ngFor="let l of options.location" [value]="l">{{l}}</option>
-        </select></div>
+        </select>
+      </div>
       <div><label >parent clinic</label>
-        <input class="pull-right" [(ngModel)]="data.parent_clinic">
+        <input class="pull-right" [(ngModel)]="data.parent_clinic" [ngbTypeahead]="searchParentClinic">
       </div>
       <div><label >sub clinic</label>
-        <input class="pull-right" [(ngModel)]="data.sub_clinic">
+        <input class="pull-right" [(ngModel)]="data.sub_clinic" [ngbTypeahead]="searchSubClinic">
       </div>
       <div><label >Checked out by</label>
         <select class="pull-right" [(ngModel)]="data.checked_out_by">
+          <option value=''></option>
           <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
         </select>
       </div>
-      <div><label >checked out date</label><input class="pull-right" type="text" [(ngModel)]="data.checked_out_date"></div>
+      <div>
+        <label >checked out date</label>
+        <!--<input [(ngModel)]="data.checked_out_date">-->
+        <input class="pull-right" type="text" [value]="data.checked_out_date |  date:'yyyy-MM-dd'" [ngStyle]="styles.checked_out_date"
+               (change)="data.checked_out_date = $event.target.value">
+        <!--<span *ngIf=test.errors?.pattern">Date Format: yyyy-MM-dd</span>-->
+      </div>
       <p>Or</p>
       <div><label>checked in by</label>
         <select class="pull-right" [(ngModel)]="data.checked_in_by">
+          <option value=""></option>
           <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
         </select>
       </div>
-      <div><label>checked in date</label><input class="pull-right" type="text" [(ngModel)]="data.checked_in_date"></div>
+      <div><label>checked in date</label>
+        <input class="pull-right" type="text" [value]="data.checked_in_date | date:'yyyy-MM-dd'" [ngStyle]="styles.checked_in_date"
+               (change)="data.checked_in_date=$event.target.value">
+      </div>
     </div>
     <hr>
     <div class="row">
@@ -46,6 +61,7 @@
           <div><label >model number</label><input class="pull-right"  type="text" [(ngModel)]="data.model_number"></div>
           <div><label >points to</label>
             <select class="pull-right" [(ngModel)]="data.points_to">
+              <option value=""></option>
               <option *ngFor="let m of options.points_to" [value]="m">{{m}}</option>
             </select>
           </div>
@@ -53,6 +69,7 @@
         <div>
             <label >model description</label>
             <select class="pull-right" [(ngModel)]="data.model_description">
+              <option value=""></option>
               <option *ngFor="let m of options.model_description" [value]="m">{{m}}</option>
             </select>
           </div>
@@ -60,17 +77,20 @@
           <div>
             <label >manufacturer</label>
             <select class="pull-right" [(ngModel)]="data.manufacturer">
+              <option value=""></option>
               <option *ngFor="let m of options.manufacturer" [value]="m">{{m}}</option>
             </select>
           </div>
         <div>
           <label >firmware version</label>
           <select class="pull-right" [(ngModel)]="data.firmware_version">
+            <option value=""></option>
             <option *ngFor="let m of options.firmware_version" [value]="m">{{m}}</option>
           </select>
         </div>
         <div><label >zywie logo</label>
           <select class="pull-right" [(ngModel)]="data.zywie_logo">
+            <option value=""></option>
             <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
           </select>
         </div>
@@ -79,12 +99,16 @@
           <div>
             <label>sim provider</label>
             <select class="pull-right" [(ngModel)]="data.sim_provider">
+              <option value=""></option>
               <option *ngFor="let m of options.sim_provider" [value]="m">{{m}}</option>
             </select>
           </div>
-          <div><label>wyless provision_date</label><input class="pull-right" type="text" [(ngModel)]="data.wyless_provision_date"></div>
+          <div><label>wyless provision_date</label>
+            <input class="pull-right" type="text" [value]="data.wyless_provision_date | date:'yyyy-MM-dd'"  [ngStyle]="styles.wyless_provision_date"
+                   (change)="data.wyless_provision_date=$event.target.value"></div>
           <div><label>use zywie sim</label>
             <select class="pull-right" [(ngModel)]="data.use_zywie_sim">
+              <option value=""></option>
               <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
             </select>
           </div>
@@ -92,26 +116,37 @@
       <div class="col">
         <h5 class="text-primary">Order Atrributes</h5>
         <div><label>purchase order</label><input class="pull-right" type="text" [(ngModel)]="data.purchase_order"></div>
-        <div><label>registration date</label><input class="pull-right" type="text" [(ngModel)]="data.registration_date"></div>
+        <div><label>registration date</label>
+          <input class="pull-right" type="text" [value]="data.registration_date | date:'yyyy-MM-dd'" [ngStyle]="styles.registration_date"
+                 (change)="data.registration_date=$event.target.value"></div>
         <br>
         <h5 class="text-info">Test Attributes</h5>
-        <div><label>device test date</label><input class="pull-right" type="text" [(ngModel)]="data.device_test_date"></div>
-        <div><label>device suspend date</label><input class="pull-right" type="text" [(ngModel)]="data.device_suspension_date"></div>
+        <div><label>device test date</label>
+          <input class="pull-right" type="text" [value]="data.device_test_date | date:'yyyy-MM-dd'" [ngStyle]="styles.device_test_date"
+                 (change)="data.device_test_date=$event.target.value"></div>
+        <div><label>device suspend date</label>
+          <input class="pull-right" type="text" [value]="data.device_suspension_date | date:'yyyy-MM-dd'"  [ngStyle]="styles.device_suspension_date"
+                 (change)="data.device_suspension_date=$event.target.value"></div>
         <br>
         <h5 class="text-info">Lease</h5>
         <div><label>lease</label>
           <select class="pull-right" [(ngModel)]="data.data">
+            <option value=""></option>
             <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
           </select>
         </div>
         <div><label>lease price per month</label><input class="pull-right" type="text" [(ngModel)]="data.lease_price_per_month"></div>
-        <div><label>lease start date</label><input class="pull-right" type="text" [(ngModel)]="data.lease_start_date"></div>
-        <div><label>lease end date</label><input class="pull-right" type="text" [(ngModel)]="data.lease_end_date"></div>
+        <div><label>lease start date</label>
+          <input class="pull-right" type="text" [value]="data.lease_start_date | date:'yyyy-MM-dd'" [ngStyle]="styles.lease_start_date"
+                 (change)="data.lease_start_date=$event.target.value"></div>
+        <div><label>lease end date</label>
+          <input class="pull-right" type="text" [value]="data.lease_end_date | date:'yyyy-MM-dd'" [ngStyle]="styles.lease_end_date"
+                 (change)="data.lease_end_date=$event.target.value"></div>
       </div>
     </div>
     <br>
     <button type="button" class="btn btn-secondary col-sm-2" (click)="activeModal.dismiss()">Cancel</button>
-    <button type="button" class="btn btn-danger col-sm-2 pull-right" (click)="activeModal.close(data)">Update</button>
+    <button type="button" class="btn btn-danger col-sm-2 pull-right" (click)="update(data)">Update</button>
     <br>
   </div>
 </div>

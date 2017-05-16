@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class DeviceService {
-  device_Mgt_table_columns: Array<string> = [
+  Api: string = 'http://localhost:3000';
+  private device_Mgt_table_columns: Array<string> = [
     'purchase_order',
     'registration_date',
     'device_sn',
@@ -41,7 +42,7 @@ export class DeviceService {
     'lease_start_date',
     'lease_end_date'
    ];
-  device_inventory_table_columns: Array<string> = [
+  private device_inventory_table_columns: Array<string> = [
     'received_date',
     'order_id',
     'purchase_order' ,
@@ -55,7 +56,7 @@ export class DeviceService {
     'device_sn',
     'package_content'
   ];
-  accessory_inventory_table_columns: Array<string> = [
+  private accessory_inventory_table_columns: Array<string> = [
     'row',
     'received_date' ,
     'manufacturer_order_ID',
@@ -71,7 +72,7 @@ export class DeviceService {
     'total_price'
 
   ];
-  device_history_table_columns: Array<string> = [
+  private device_history_table_columns: Array<string> = [
     'row',
     'history_date',
     'device_sn' ,
@@ -84,7 +85,7 @@ export class DeviceService {
     'note'
   ];
   // select options data in device management page
-  deviceMgt = {
+  private deviceMgt = {
     options: {
       model_description: ['Aera CT 2G', 'Aera CT 3G'],
       firmware_version: [ 'V2.8', 'V2.7', 'V2.6', 'V2.5'],
@@ -148,5 +149,10 @@ export class DeviceService {
     return this.http.get(url)
       .map(response => response.json())
       .catch(error => Observable.throw(error));
+  };
+  postData(url, data): Observable<any> {
+    return this.http.post(url, data)
+      .map(res => res.json())
+      .catch(err => Observable.throw(err));
   }
 }

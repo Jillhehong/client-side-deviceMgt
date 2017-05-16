@@ -4,21 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { UIRouterModule } from '@uirouter/angular';  // import ui-router
 import { AppComponent } from './app.component';
-import { DeviceManagementComponent } from './device-management/device-mgt.component';
-import { DeviceHistoryComponent } from './device-history/device-history.component';
-import { DeviceInventoryComponent } from './device-inventory/device-inventory.component';
-import { AccessoryInventoryComponent } from './accessory-inventory/accessory-inventory.component';
-import { CustomerManagementComponent } from './customer-management/customer-management.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignupComponent } from './signup/signup.component'; // import signup page
-import { LoginComponent } from './login/login.component';    // import login page
-import { HomepageComponent } from './homepage/homepage.component';
-import {DeviceService} from '../service/device.service';          // import service
+import { DeviceManagementComponent } from './device mgt/device-management/device-mgt.component';
+import { DeviceHistoryComponent } from './device mgt/device-history/device-history.component';
+import { DeviceInventoryComponent } from './device mgt/device-inventory/device-inventory.component';
+import { AccessoryInventoryComponent } from './device mgt/accessory-inventory/accessory-inventory.component';
+import { CustomerManagementComponent } from './device mgt/customer-management/customer-management.component';
+import { DashboardComponent } from './device mgt/dashboard/dashboard.component';
+import { SignupComponent } from './device mgt/signup/signup.component'; // import signup page
+import { LoginComponent } from './device mgt/login/login.component';    // import login page
+import { HomepageComponent } from './device mgt/homepage/homepage.component';
+import {DeviceService} from './service/device.service';          // import service
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; // import ng-bootstrap
-import { PublicComponent } from './public/public.component';
+import { PublicComponent } from './device mgt/public/public.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table'; // import ng2-smart-table
-import { EditDeviceManagementModalComponent } from './device-management/modal/edit-deviceMgt-modal/edit-device-mgt-modal.component';
+import { EditDeviceManagementModalComponent } from './device mgt/device-management/modal/edit-deviceMgt-modal/edit-device-mgt-modal.component';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { InsertDeviceMgtModalComponent } from './device mgt/device-management/modal/insert-device-mgt-modal/insert-device-mgt-modal.component';
+import { TestComponent } from './test/test.component';
+// import { TypeaheadModule  } from 'ngx-bootstrap';
 
 const routes = { states: [
   { name: 'public', abstract: true, component: PublicComponent},
@@ -54,7 +57,9 @@ const routes = { states: [
     LoginComponent,
     HomepageComponent,
     PublicComponent,
-    EditDeviceManagementModalComponent
+    EditDeviceManagementModalComponent,
+    InsertDeviceMgtModalComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +69,11 @@ const routes = { states: [
     NgxPaginationModule,
     UIRouterModule.forRoot(routes),
     NgbModule.forRoot()
+    // TypeaheadModule.forRoot()
   ],
   entryComponents: [
-    EditDeviceManagementModalComponent
+    EditDeviceManagementModalComponent,
+    InsertDeviceMgtModalComponent
   ],
   providers: [DeviceService],
   bootstrap: [AppComponent]

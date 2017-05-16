@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <br>
+  <!--testing-->
+  <!--<input type="file" (change)="changeListener($event)">-->
+  <!--end testing-->
   <div style="width: 900px">
-    <ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+    <ngb-alert *ngIf="alert.successMessage" [type]="alert.type" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
   </div>
   <!--<div class="row">-->
     <!--<div class="col-sm-8">-->
@@ -33,7 +36,29 @@
     <button type="button" class="btn btn-default btn-sm col-sm-1" (click)="editSelectedData()" [disabled]="checkedOrNot">
       <i class="fa fa-pencil" aria-hidden="true"></i> Edit Selected
     </button>
-    <button type="button" class="btn btn-default btn-sm offset-sm-8 col-sm-1"><span class="fa fa-download"></span> Export</button>
+    <!--delete-->
+    <ng-template #content let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Device SN {{selectedMgtData.device_sn}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <p>Are you sure to delete device SN {{selectedMgtData.device_sn}}?</p>
+          <br><br>
+          <button type="button" class="btn btn-secondary col-sm-3" (click)="d()">Cancel</button>
+          <button type="button" class="btn btn-danger col-sm-3 pull-right" (click)="c()">Confirm</button>
+          <br><br>
+        </div>
+      </div>
+    </ng-template>
+    <button type="button" class="btn btn-default btn-sm offset-sm-1" (click)="deleteSelectedData(content)" [disabled]="checkedOrNot">
+      <i class="fa fa-eraser" aria-hidden="true"></i> Delete Selected
+    </button>
+    <!--end delete-->
+    <button type="button" class="btn btn-default btn-sm offset-sm-4 col-sm-1" (click)="create()">Create New</button>
+    <button type="button" class="btn btn-default btn-sm col-sm-1">
+      <a [href]="downloadUrl" download="deviceMgt.csv" style="color: black"> <span class="fa fa-download"></span> Export</a>
+    </button>
 
 
     <!--filtering in popover-->
@@ -63,7 +88,8 @@
         </tr>
       </table>
       <br>
-      <button type="button" class="btn btn-default btn-sm" (click)="filter(search)">Search</button>
+      <button type="button" class="btn btn-default btn-sm " (click)="clearFilter()">Clear</button>
+      <button type="button" class="btn btn-primary btn-sm pull-right" (click)="filter(search)">Search</button>
     </ng-template>
     <button type="button" class="btn btn-default btn-sm col-sm-1" [ngbPopover]="popContent" popoverTitle="Filters" placement="left">
       <span class="fa fa-sort-desc"></span> Filter</button>
@@ -75,7 +101,7 @@
     <thead>
       <tr>
         <th><input type="checkbox" disabled></th>
-        <th (click)="sortNumeric('device_sn')">Device SN<span class="fa fa-sort-desc"></span>
+        <th (click)="sortString('device_sn')">Device SN<span class="fa fa-sort-desc"></span>
         </th>
         <th (click)="sortString('status')">Status<span class="fa fa-sort-desc"></span></th>
         <th>Checked Out By</th>
@@ -88,7 +114,7 @@
       </tr>
     </thead>
    <tbody>
-   <tr *ngFor="let item of deviceMgtData | paginate: { itemsPerPage: 20, currentPage: p }; let i=index">
+   <tr [hidden]="!deviceMgtData?.length" *ngFor="let item of deviceMgtData | paginate: { itemsPerPage: 20, currentPage: p }; let i=index">
      <td><input type="checkbox" [value]="i" (change)="checkbox($event)"></td>
      <td>{{item.device_sn}}</td>
      <td>{{item.status}}</td>
@@ -100,6 +126,7 @@
      <td>{{item.physician}}</td>
      <td><div [ngStyle]="billableStyle(item.billable)" class="text-center">{{item.billable}}</div></td>
     </tr>
+   <div [hidden]="deviceMgtData?.length" class="text-center text-danger">No result found!</div>
    </tbody>
   </table>
 
