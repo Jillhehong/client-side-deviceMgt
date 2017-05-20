@@ -21,6 +21,13 @@ import { EditDeviceManagementModalComponent } from './device mgt/device-manageme
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { InsertDeviceMgtModalComponent } from './device mgt/device-management/modal/insert-device-mgt-modal/insert-device-mgt-modal.component';
 import { TestComponent } from './test/test.component';
+import {EditDeviceHistoryComponent} from './device mgt/device-history/edit/edit.modal';
+import {InsertDeviceHistoryComponent} from './device mgt/device-history/insert/insert.modal';
+import {SharedVariables} from "./shared/shared.variables";
+import {Location} from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
+
+
 // import { TypeaheadModule  } from 'ngx-bootstrap';
 
 const routes = { states: [
@@ -29,6 +36,8 @@ const routes = { states: [
   { name: 'public.dashboard', url: '/dashboard',  component: DashboardComponent },
   { name: 'public.deviceManagement', url: '/deviceManagement',  component: DeviceManagementComponent },
   { name: 'public.deviceHistory', url: '/deviceHistory',  component: DeviceHistoryComponent },
+  { name: 'public.editDeviceHistory', url: '/deviceHistory/edit',  component: EditDeviceHistoryComponent },
+  { name: 'public.insertDeviceHistory', url: '/deviceHistory/insert',  component: InsertDeviceHistoryComponent },
   { name: 'public.deviceInventory', url: '/deviceInventory',  component: DeviceInventoryComponent },
   { name: 'public.accessoryInventory', url: '/accessoryInventory',  component: AccessoryInventoryComponent },
   { name: 'public.customerManagement', url: '/customerManagement',  component: CustomerManagementComponent },
@@ -59,7 +68,9 @@ const routes = { states: [
     PublicComponent,
     EditDeviceManagementModalComponent,
     InsertDeviceMgtModalComponent,
-    TestComponent
+    TestComponent,
+    EditDeviceHistoryComponent,
+    InsertDeviceHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -67,15 +78,18 @@ const routes = { states: [
     HttpModule,
     Ng2SmartTableModule,
     NgxPaginationModule,
+    ChartsModule,
     UIRouterModule.forRoot(routes),
     NgbModule.forRoot()
     // TypeaheadModule.forRoot()
   ],
   entryComponents: [
     EditDeviceManagementModalComponent,
-    InsertDeviceMgtModalComponent
+    InsertDeviceMgtModalComponent,
+    EditDeviceHistoryComponent,
+    InsertDeviceHistoryComponent
   ],
-  providers: [DeviceService],
+  providers: [DeviceService, SharedVariables, Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

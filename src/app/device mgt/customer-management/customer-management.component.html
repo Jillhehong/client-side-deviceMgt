@@ -1,3 +1,34 @@
-<p>
-  customer-management works!
-</p>
+<div class="container">
+  <br>
+  <table class="table table-bordered table-condensed table-sm table-hover table-responsive">
+    <thead>
+    <tr>
+      <th>NO.</th>
+      <th>Clinic</th>
+      <th>Sub Clinic</th>
+      <th>Count of Devices</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of customerData; let i=index">
+      <td>{{i+1}}</td>
+      <td>{{item.parent_clinic}}</td>
+      <td>{{item.sub_clinic}}</td>
+      <td>{{item.totaldevices}}</td>
+      <!--<ngb-accordion #acc="ngbAccordion">-->
+        <!--<ngb-panel [title]="item.totalDevices">-->
+          <!--<ng-template ngbPanelContent>-->
+            <!--&lt;!&ndash;<p *ngFor="let device of item.device_sn">{{item.device_sn}}</p>&ndash;&gt;-->
+          <!--</ng-template>-->
+        <!--</ngb-panel>-->
+      <!--</ngb-accordion>-->
+    </tr>
+    <tr>
+      <td></td>
+      <td><strong>Grand Total</strong></td>
+      <td></td>
+      <td><strong>{{totalDevices}}</strong></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

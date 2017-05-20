@@ -37,9 +37,18 @@
           <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
         </select>
       </div>
-      <div>
-        <label >checked out date</label>
-        <input class="pull-right" type="date" [(ngModel)]="data.checked_out_date">
+      <div class="row">
+        <label class="col-sm-7" >checked out date</label>
+        <div class="input-group col-sm-4" >
+          <input placeholder="yyyy-mm-dd" [(ngModel)]="data.checked_out_date"
+                 ngbDatepicker  #checked_out_date="ngbDatepicker">
+          <div class="input-group-addon" (click)="checked_out_date.toggle()" >
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <!--<img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>-->
+          </div>
+        </div>
+
+        <!--<input class="pull-right" type="date" [(ngModel)]="data.checked_out_date">-->
         <!--<span *ngIf=test.errors?.pattern">Date Format: yyyy-MM-dd</span>-->
       </div>
       <p>Or</p>

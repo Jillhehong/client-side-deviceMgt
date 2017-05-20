@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+
 @Injectable()
 export class DeviceService {
   Api: string = 'http://localhost:3000';
@@ -85,8 +86,8 @@ export class DeviceService {
     'note'
   ];
   // select options data in device management page
-  private deviceMgt = {
-    options: {
+  private selectOptions = {
+    devidceMgtoptions: {
       model_description: ['Aera CT 2G', 'Aera CT 3G'],
       firmware_version: [ 'V2.8', 'V2.7', 'V2.6', 'V2.5'],
       manufacturer: ['TZ Medical'],
@@ -126,8 +127,51 @@ export class DeviceService {
         'Shelf-D-pre-order'
       ],
       checked_by: [ 'Alex Armstrong', 'Emir Muhovic', 'Latha Ganeshan', 'Sameer Adumala', 'Steve Rode']
+    },
+    deviceHistoryOptions: {
+      device_action: [
+        'Inventory-Inactive',
+        'Checked In',
+        'Checked Out',
+        'Decommissioned',
+        'Defective',
+        'Return-RMA',
+        'Sales Demo'
+      ],
+      by_whom: [
+        'Alex Armstrong',
+        'Emir Muhovic',
+        'Latha Ganeshan',
+        'Sameer Adumala'
+      ],
+      status: [
+        'Beta Site',
+        'Clinical Trials',
+        'Customer',
+        'Decommissioned',
+        'Defective',
+        'Inventory-Active',
+        'Inventory-Inactive',
+        'Inventory-Suspended',
+        'Refurbished',
+        'RMA',
+        'Sales - Out',
+        'Development',
+        'Sales Demo',
+        'Troubleshooting',
+        'SIM Switch',
+        'Lost'
+      ],
+      YesOrNo: [
+        'Y',
+        'N'
+      ]
     }
 };
+  private deviceHistory = {
+
+};
+
   constructor(private http: Http) {  }
   getDeviceMgtColumns() {
     return this.device_Mgt_table_columns;
@@ -142,8 +186,12 @@ export class DeviceService {
     return this.accessory_inventory_table_columns;
   }
   getDeviceMgtSelectOptions() {
-    return this.deviceMgt.options;
+    return this.selectOptions.devidceMgtoptions;
   }
+  getDeviceHistorySelectOptions() {
+    return this.selectOptions.deviceHistoryOptions;
+  }
+
   // http service
   getData(url): Observable<any> {
     return this.http.get(url)

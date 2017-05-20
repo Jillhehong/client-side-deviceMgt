@@ -1,18 +1,30 @@
 .btn-sm {
   border-radius: 100px;
 }
-/*fa {*/
-  /*background-color: #0a94d6;*/
-/*}*/
 
-/*.popoverDiv {*/
-  /*width: 300px;*/
-  /*text-align: center;*/
-/*}*/
-/*:host >>> .popover {*/
-  /*max-width: 600px;*/
-/*}*/
+.active {
+  background-color: #E1FFC2;
+}
+.table tr:hover {
+  background-color: #F8F9F9;
+  cursor: pointer;
+}
 
+/*.fa-angle-dropdown {*/
+  /*color: darkblue;*/
+/*}*/
+/*.dropdown-menu {*/
+  /*background-color: #F8F9F9;*/
+/*}*/
+/*.dropdown-item:hover {*/
+  /*color: #EB4E1E;*/
+/*}*/
+/*.dropdown-toggle::after {*/
+  /*display:none*/
+/*}*/
+/*.action:hover {*/
+  /*cursor: pointer;*/
+/*}*/
 .filtering input, .filtering select {
   width: 200px;
   height:30px;

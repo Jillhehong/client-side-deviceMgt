@@ -1,6 +1,35 @@
-#zywielogo {
-  height:45px;
+.bg-faded {
+  background-color: #232323;
+  color: white;
+  padding: 1px;
 }
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  font-family: "Rajdhani", "DIN", sans-serif;
+  font-weight: bold;
+}
+.nav-link {
+  display: contents;
+}
+li {
+  margin-left: 25px;
+}
+li:hover {
+  background-color: #6C7176;
+}
+li .active {
+  background-color: #6C7176;
+}
+.dropdown-menu {
+  background-color: #F8F9F9;
+}
+.dropdown-item:hover {
+  color: #EB4E1E;
+}
+.fa {
+  color: #EB4E1E;
+}
+
 .panel-footer {
   position: relative;
   /*margin-bottom: -150px; !* negative value of footer height *!*/

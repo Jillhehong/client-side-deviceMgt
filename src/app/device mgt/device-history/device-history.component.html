@@ -1,3 +1,112 @@
-<p>
-  device-history works!
-</p>
+<div class="container-fluid">
+    <ngb-tabset>
+      <div>
+        <ngb-tab title="History">
+          <ng-template ngbTabContent>
+            <div style="width: 900px">
+              <ngb-alert *ngIf="alert.successMessage" [type]="alert.type" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+            </div>
+            <br>
+            <div class="row">
+                <select [(ngModel)]="search.searchBy" class="offset-sm-1 col-sm-2">
+                  <option value="" selected disabled>Select an search</option>
+                  <option value="history_date">History Date</option>
+                  <option value="device_sn">Device SN</option>
+                  <option value="device_action">Device Action</option>
+                  <option value="by_whom">By Whom</option>
+                  <option value="status">Status</option>
+                  <option value="device_owner">Device Owner</option>
+                  <option value="replace_device">Replaced Device</option>
+                  <option value="replaced_device_sn">Replaced Device SN</option>
+                </select>
+                <input type="text" [(ngModel)]="search.searchValue" placeholder="search value">
+              <button class="btn btn-sm btn-primary" (click)="searchByItem(search)"><i class="fa fa-search"></i></button>
+              <button class="btn btn-secondary offset-sm-5 col-sm-1" (click)="create()">Create New</button>
+            </div>
+            <br>
+
+            <table class="table table-bordered table-hover table-sm table-responsive">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>NO.</th>
+                  <th>History Date</th>
+                  <th>Device_sn</th>
+                  <th>Device Action</th>
+                  <th>By Whom</th>
+                  <th>Status</th>
+                  <th>Device Owner</th>
+                  <th>Replace Device</th>
+                  <th>Replaced Device SN</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of deviceHistoryData | paginate: { itemsPerPage: SelectedNumberOfRow , currentPage: p }; let i = index">
+                  <td>
+                    <div class="text-center action" >
+                      <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                          <i class="fa fa-angle-down" style="color: darkblue" ngbDropdownToggle></i>
+                        <div class="dropdown-menu" aria-labelledby="dropdownManual">
+                          <button class="dropdown-item" (click)="edit(i)">Edit</button>
+                          <!--modal to confirm delete-->
+                          <ng-template #content let-c="close" let-d="dismiss">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Confirm</h4>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container">
+                                <p>Are you sure to delete device SN <strong>{{item.device_sn}}</strong> history?</p>
+                                <br><br>
+                                <button type="button" class="btn btn-secondary col-sm-3" (click)="d()">Cancel</button>
+                                <button type="button" class="btn btn-danger col-sm-3 pull-right" (click)="c(item)">Confirm</button>
+                                <br><br>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <button class="dropdown-item" (click)="delete(content)">delete</button>
+                          <!--end of modal for delete-->
+                        </div>
+                      </div>
+                    </div>
+                    </td>
+                  <td><div style="width: 10px">{{i+1}}</div></td>
+                  <td><div style="width: 100px">{{item.history_date | date: 'yyyy-MM-dd'}}</div></td>
+                  <td><div style="width: 100px">{{item.device_sn}}</div></td>
+                  <td><div style="width: 100px">{{item.device_action}}</div></td>
+                  <td><div style="width: 100px">{{item.by_whom}}</div></td>
+                  <td><div style="width: 100px">{{item.status}}</div></td>
+                  <td><div style="width: 100px">{{item.device_owner}}</div></td>
+                  <td><div style="width: 100px">{{item.replace_device}}</div></td>
+                  <td><div style="width: 100px">{{item.replaced_device_sn}}</div></td>
+                  <td><div style="width: 200px">{{item.note}}</div></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row">
+              <div class="col-sm-7">
+                <!--ngx-pagination-->
+                <pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+              </div>
+              <div class="offset-sm-3 col-sm-2">
+                <select [(ngModel)]="SelectedNumberOfRow">
+                  <option value="30" selected>30</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                </select>
+              </div>
+            </div>
+
+          </ng-template>
+        </ngb-tab>
+      </div>
+
+      <ngb-tab title="Action">
+        <ng-template ngbTabContent>
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+</div>

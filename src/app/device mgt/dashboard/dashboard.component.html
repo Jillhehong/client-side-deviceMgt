@@ -1,3 +1,92 @@
-<p>
-  dashboard works!
-</p>
+<div class="container">
+  <br>
+  <!--summary table-->
+  <div class="row">
+    <div class="col-sm-6">
+      <table class="table table-condensed table-bordered table-hover table-striped dashboardTables">
+        <thead>
+        <tr>
+          <th>Available Inventory List (Ttls)</th>
+          <th>Qty</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-danger">
+          <td>Total Available Devices</td>
+          <td><strong>{{totalAvailableDevices}}</strong></td>
+        </tr>
+        <tr>
+          <td>3M 2560 red dot electrodes(50/packet)</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>3M 2570-5 red dot electrodes</td>
+          <td>1000</td>
+        </tr>
+        <tr>
+          <td>Sensitive Electrodes(60/packet)</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>Dual-Electrodes(300/packet)</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>Device User Manuals</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>Cel-Fi Smart Signal Booster</td>
+          <td>2</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-offset-2 col-sm-4">
+      <table class="table table-bordered table-hover table-striped dashboardTables">
+        <tr>
+          <th>Devices Ordered from TZ Medical</th>
+          <th>Qty</th>
+        </tr>
+        <tr>
+          <td>Total Ordered Qty</td>
+          <td>{{orders.total_ordered_qty}}</td>
+        </tr>
+        <tr>
+          <td>Total Received Qty</td>
+          <td>{{orders.total_received_qty}}</td>
+        </tr>
+        <tr>
+          <td>Total Deficiency Qty</td>
+          <td>{{orders.total_deficiency_qty}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div style="display: block" class="text-center" *ngIf="billable.isDataAvailable ">
+    <canvas baseChart width="300" height="300" [datasets]="billable.datasets"  [options]="billable.options"
+            [labels]="billable.labels" [colors]="billable.colors"  chartType="pie">
+    </canvas>
+  </div>
+  <div class="row">
+    <div  style="display: block" class="col-sm-6"  *ngIf="status.isDataAvailable">
+      <canvas baseChart width="400" height="250" [datasets]="status.datasets"  [labels]="status.labels" [options]="status.options"
+            [colors]="status.colors"   [legend]="false"  chartType="horizontalBar">
+      </canvas>
+    </div>
+    <br>
+    <div  style="display: block" class="col-sm-6"  *ngIf="location.isDataAvailable">
+      <canvas baseChart width="400" height="250" [datasets]="location.datasets"  [labels]="location.labels" [options]="location.options"
+              [colors]="location.colors"   [legend]="false"  chartType="horizontalBar">
+      </canvas>
+    </div>
+  </div>
+  <br>
+   <div  style="display: block" class="text-center"  *ngIf="purchaseOrder.isDataAvailable">
+     <canvas baseChart width="800" height="260" [datasets]="purchaseOrder.datasets"  [labels]="purchaseOrder.labels" [options]="purchaseOrder.options"
+             [colors]="purchaseOrder.colors"   [legend]="false"  chartType="bar">
+     </canvas>
+   </div>
+
+</div>

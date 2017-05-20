@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -14,13 +15,16 @@ export class DeviceManagementComponent implements OnInit {
   alert = {successMessage: false, type: null, message: null};
   status: boolean;
   deviceMgtData: any;
-  checkedOrNot = true;
+  checkedOrNot: boolean;
   selectedMgtData: any;
   sort = false;
   search = {device_sn: null, parent_clinic: null, status: null, location: null};
   options: object;
   Api: string;
   downloadUrl: string;
+  RowsPerPage = 30;
+  classTrueOrFalse = [];
+  ifSelected: boolean;
 
   constructor(private modalService: NgbModal, private deviceService: DeviceService) {}
 
@@ -30,6 +34,7 @@ export class DeviceManagementComponent implements OnInit {
     // data for smart-table
     this.deviceService.getData(this.Api + '/deviceMgt/get').subscribe(response => {
       this.deviceMgtData = response;
+      this.classTrueOrFalse.push(false);
     });
 
     // select options
@@ -53,39 +58,44 @@ export class DeviceManagementComponent implements OnInit {
     }
   }
 
+  // selected row
+  selectedOrUnselectRow(index) {
+    if(!this.classTrueOrFalse[index]) {
+      this.classTrueOrFalse[index] = true;
+      this.ifSelected = true;
+      this.selectedMgtData = this.deviceMgtData[index];
+    } else {
+      this.classTrueOrFalse[index] = false;
+      this.ifSelected = false;
+    }
+  }
+
   // edit selected row
   editSelectedData() {
     const modalRef = this.modalService.open(EditDeviceManagementModalComponent, {backdrop: 'static', size: 'lg'});
     modalRef.componentInstance.data = this.selectedMgtData;
     modalRef.result.then(() => {
-        this.alert = {successMessage: true, type: 'success', message: 'update success'};
-        console.log('testing');
-        console.log(this.alert);
-        }, (error) => {
-        this.alert = {successMessage: true, type: 'danger', message: 'update failed '+ error};
-        console.log(this.alert);
-      });
+      this.alert = {successMessage: true, type: 'success', message: 'update success'};
+      console.log('testing');
+      console.log(this.alert);
+    }, (error) => {
+      console.log(this.alert);
+    });
   }
-  // delete selected row
+  // insert selected row
   deleteSelectedData(content) {
     console.log(this.selectedMgtData);
-    // const modalRef = this.modalService.open(content);
-    // modalRef.componentInstance.data = this.selectedMgtData;
-    // console.log('test');
-    // console.log(modalRef.componentInstance.data );
     this.modalService.open(content).result.then((res) => {
       console.log(res);
-      this.deviceService.postData(this.Api + '/deviceMgt/delete', this.selectedMgtData).subscribe(res => {
+      this.deviceService.postData(this.Api + '/deviceMgt/insert', this.selectedMgtData).subscribe(res => {
         console.log(res);
-        this.alert = {successMessage: true, type: 'success', message: 'delete success'};
+        this.alert = {successMessage: true, type: 'success', message: 'insert success'};
       }, err => {
         console.log(err);
-        this.alert = {successMessage: true, type: 'danger', message: 'delete failed '+ err};
+        this.alert = {successMessage: true, type: 'danger', message: 'insert failed '+ err};
       });
-
     }, (err) => {
       console.log(err);
-      this.alert = {successMessage: true, type: 'danger', message: 'delete failed '+ err};
     });
   }
   // create new
@@ -96,20 +106,13 @@ export class DeviceManagementComponent implements OnInit {
       console.log('testing');
       console.log(this.alert);
     }, (error) => {
-      this.alert = {successMessage: true, type: 'danger', message: 'update failed '+ error};
+      // this.alert = {successMessage: true, type: 'danger', message: 'update failed '+ error};
       console.log(this.alert);
     });
 
 
   }
 
-  // checkbox for selecting row
-  checkbox(event): void {
-    if (event.target.checked) {
-      this.checkedOrNot = false;
-      this.selectedMgtData = this.deviceMgtData[event.target.value];
-    }
-  }
   // searching
   filter(value) {
     if(this.search.device_sn || this.search.parent_clinic || this.search.status || this.search.location) {
@@ -125,17 +128,6 @@ export class DeviceManagementComponent implements OnInit {
     });
   }
 
-  // sorting
-  // sortNumeric(string) {
-  //   this.sort = !this.sort;
-  //   this.deviceMgtData.sort( (a, b) => {
-  //     if (this.sort) {
-  //       return a[string] - b[string];
-  //     } else {
-  //       return b[string] - a[string];
-  //     }
-  //   });
-  // }
   sortString(string) {
     this.sort = !this.sort;
     this.deviceMgtData.sort( (a, b) => {

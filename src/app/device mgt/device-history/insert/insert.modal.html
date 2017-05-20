@@ -1,0 +1,91 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Create New</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="text-danger" *ngIf="error">{{error}}</div>
+    <br>
+    <form #ngForm="ngForm" name="ngForm">
+      <br>
+      <div class="form-group row">
+        <label for="history_date" class="col-4 text-right col-form-label">History Date</label>
+        <div class="col-5">
+          <input class="form-control" type="text"  id="history_date"  name="history_date" [ngStyle]="styles.history_date_style"
+                 [value]="data.history_date | date: 'yyyy-MM-dd'" (change)="data.history_date=$event.target.value">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="device_sn" class="col-4 text-right col-form-label">Device SN *</label>
+        <div class="col-5">
+          <input class="form-control" type="text"  id="device_sn"  name="device_sn" [(ngModel)]="data.device_sn" required #device_sn="ngModel">
+          <div class="pull-right form_msg" *ngIf="device_sn.errors?.required && device_sn.touched">Device SN is required</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="device_action" class="col-4 text-right col-form-label">Device Action</label>
+        <div class="col-5">
+          <select [(ngModel)]="data.device_action" class="form-control" id="device_action" name="device_action">
+            <option value=""></option>
+            <option *ngFor="let o of options.device_action" [value]="o">{{o}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="by_whom" class="col-4 text-right col-form-label">By Whom</label>
+        <div class="col-5">
+          <select [(ngModel)]="data.by_whom" class="form-control" id="by_whom" name="by_whom">
+            <option value=""></option>
+            <option *ngFor="let o of options.by_whom" [value]="o">{{o}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="status" class="col-4 text-right col-form-label">Status</label>
+        <div class="col-5">
+          <select [(ngModel)]="data.status" class="form-control" id="status" name="status">
+            <option value=""></option>
+            <option *ngFor="let o of options.status" [value]="o">{{o}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="device_owner" class="col-4 text-right col-form-label">Device Owner</label>
+        <div class="col-5">
+          <input class="form-control" type="text"  id="device_owner" name="device_owner"
+                 [(ngModel)]="data.device_owner" [ngbTypeahead]="search">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="replace_device" class="col-4 text-right col-form-label">Replace Device</label>
+        <div class="col-5">
+          <select [(ngModel)]="data.replace_device" class="form-control" id="replace_device" name="replace_device">
+            <option value=""></option>
+            <option *ngFor="let o of options.YesOrNo" [value]="o">{{o}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="data.replace_device == 'Y'">
+        <label for="replaced_device_sn" class="col-4 text-right col-form-label">Replaced Device SN</label>
+        <div class="col-5">
+          <input class="form-control" type="text"  id="replaced_device_sn" name="replaced_device_sn"  [ngStyle]="styles.replaced_device_SN_style"
+                 [(ngModel)]="data.replaced_device_sn">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="note" class="col-4 text-right col-form-label">Note</label>
+        <div class="col-5">
+          <textarea class="form-control" type="text"  id="note"  name="note" [(ngModel)]="data.note" style="height: 200px"></textarea>
+        </div>
+      </div>
+    </form>
+    <br>
+    <button type="button" class="btn btn-secondary col-sm-2" (click)="activeModal.dismiss()">Cancel</button>
+    <button type="button" class="btn btn-danger offset-sm-7 col-sm-2" (click)="add(data)" >Add</button>
+    <br><br>
+  </div>
+</div>
+
