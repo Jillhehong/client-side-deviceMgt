@@ -4,6 +4,14 @@
 .dropdown-toggle::after {
   display:none
 }
-.dropdown-item:hover {
-  color:blue;
+.action .dropdown-item:hover {
+  color: #EB4E1E;
 }
+.action .dropdown-menu {
+  background-color: #F8F9F9;
+}
+.search select, .search input {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+

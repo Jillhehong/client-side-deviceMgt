@@ -1,14 +1,16 @@
 /*div label, div input {*/
 /*display: inline-block;*/
 /*}*/
-input, select {
-  border: 1px solid lightgray;
-  border-radius: 10px;
+.insert input, .insert select {
+  /*border: 1px solid lightgray;*/
+  border-radius: 5px;
   width: 200px;
   height:25px;
+  box-shadow: 2px 1px 5px 1px #969696;
 }
-.greyarea {
+.insert .greyarea {
   background-color: #E5E7E9;
   width: 500px;
   text-align: center;
 }
+

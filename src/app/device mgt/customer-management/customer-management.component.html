@@ -12,8 +12,8 @@
     <tbody>
     <tr *ngFor="let item of customerData; let i=index">
       <td>{{i+1}}</td>
-      <td>{{item.parent_clinic}}</td>
-      <td>{{item.sub_clinic}}</td>
+      <td class="customcss">{{item.parent_clinic}}</td>
+      <td class="customcss">{{item.sub_clinic}}</td>
       <td>{{item.totaldevices}}</td>
       <!--<ngb-accordion #acc="ngbAccordion">-->
         <!--<ngb-panel [title]="item.totalDevices">-->

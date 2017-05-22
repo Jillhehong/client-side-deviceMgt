@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {EditDeviceManagementModalComponent} from './modal/edit-deviceMgt-modal/edit-device-mgt-modal.component';

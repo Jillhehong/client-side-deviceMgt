@@ -1,4 +1,10 @@
 .dashboardTables th {
-  background-color: green;
+  background-color: #82C456;
   color: white;
+}
+
+table tr td:hover {
+  font-weight: 500;
+  color: #EB4E1E;
+  text-indent: 2px;
 }

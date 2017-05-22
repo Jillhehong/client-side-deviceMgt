@@ -5,8 +5,8 @@
   </div>
   <h6>Device Summary</h6>
 
-  <div class="row">
-    <button type="button" class="btn btn-default btn-sm col-sm-1" (click)="editSelectedData()" [disabled]="!ifSelected">
+  <div class="row customBtns">
+    <button type="button" class="btn btn-default btn-sm col-sm-1" (click)="editSelectedData()" [disabled]="!ifSelected" [ngClass]="{dynamicChangeCursor: ifSelected}">
       <i class="fa fa-pencil" aria-hidden="true"></i> Edit Selected
     </button>
     <!--delete-->
@@ -25,7 +25,8 @@
       </div>
     </ng-template>
 
-    <button type="button" class="btn btn-default btn-sm offset-sm-1" (click)="deleteSelectedData(content)" [disabled]="!ifSelected">
+    <button type="button" class="btn btn-default btn-sm offset-sm-1" (click)="deleteSelectedData(content)"
+            [disabled]="!ifSelected" [ngClass]="{dynamicChangeCursor: ifSelected}">
       <i class="fa fa-eraser" aria-hidden="true"></i> Delete Selected
     </button>
 
@@ -68,7 +69,7 @@
     </ng-template>
 
     <button type="button" class="btn btn-default btn-sm col-sm-1" [ngbPopover]="popContent" popoverTitle="Filters" placement="left">
-      <span class="fa fa-sort-desc"></span> Filter</button>
+      Filter <span class="fa fa-sort-desc"></span></button>
   </div>
 
 

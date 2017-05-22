@@ -1,0 +1,15 @@
+table tr th {
+  background-color: #3ec9cb;
+  font-weight: 700;
+  color:white;
+  text-align: center;
+}
+table {
+  /*color: #3ec9dc;*/
+  font-weight: 400;
+}
+.customcss:hover {
+  color: #EB4E1E;
+  font-weight: 500;
+  text-indent: 2px;
+}

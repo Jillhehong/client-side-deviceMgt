@@ -1,5 +1,7 @@
-.btn-sm {
-  border-radius: 100px;
+.customBtns .btn-sm {
+  border-radius: 30px;
+  background: linear-gradient(to right, #CACFD2 , #A6ACAF);
+  box-shadow: 2px 1px 5px 1px #969696;
 }
 
 .active {
@@ -10,23 +12,16 @@
   cursor: pointer;
 }
 
-/*.fa-angle-dropdown {*/
-  /*color: darkblue;*/
-/*}*/
-/*.dropdown-menu {*/
-  /*background-color: #F8F9F9;*/
-/*}*/
-/*.dropdown-item:hover {*/
-  /*color: #EB4E1E;*/
-/*}*/
-/*.dropdown-toggle::after {*/
-  /*display:none*/
-/*}*/
-/*.action:hover {*/
-  /*cursor: pointer;*/
-/*}*/
 .filtering input, .filtering select {
   width: 200px;
   height:30px;
   border: 1px solid lightgray;
+}
+.fa-pencil, .fa-eraser, .fa-download {
+  color: cornflowerblue;
+}
+
+.dynamicChangeCursor:hover {
+  cursor: pointer;
+  background-color: #E5E7E9;
 }

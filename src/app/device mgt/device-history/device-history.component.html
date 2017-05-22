@@ -7,7 +7,7 @@
               <ngb-alert *ngIf="alert.successMessage" [type]="alert.type" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
             </div>
             <br>
-            <div class="row">
+            <div class="row search">
                 <select [(ngModel)]="search.searchBy" class="offset-sm-1 col-sm-2">
                   <option value="" selected disabled>Select an search</option>
                   <option value="history_date">History Date</option>
@@ -19,7 +19,7 @@
                   <option value="replace_device">Replaced Device</option>
                   <option value="replaced_device_sn">Replaced Device SN</option>
                 </select>
-                <input type="text" [(ngModel)]="search.searchValue" placeholder="search value">
+                <input type="text" [(ngModel)]="search.searchValue" placeholder=" Search Value">
               <button class="btn btn-sm btn-primary" (click)="searchByItem(search)"><i class="fa fa-search"></i></button>
               <button class="btn btn-secondary offset-sm-5 col-sm-1" (click)="create()">Create New</button>
             </div>
@@ -43,8 +43,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of deviceHistoryData | paginate: { itemsPerPage: SelectedNumberOfRow , currentPage: p }; let i = index">
-                  <td>
-                    <div class="text-center action" >
+                  <td class="text-center action">
                       <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                           <i class="fa fa-angle-down" style="color: darkblue" ngbDropdownToggle></i>
                         <div class="dropdown-menu" aria-labelledby="dropdownManual">
@@ -68,7 +67,6 @@
                           <!--end of modal for delete-->
                         </div>
                       </div>
-                    </div>
                     </td>
                   <td><div style="width: 10px">{{i+1}}</div></td>
                   <td><div style="width: 100px">{{item.history_date | date: 'yyyy-MM-dd'}}</div></td>
