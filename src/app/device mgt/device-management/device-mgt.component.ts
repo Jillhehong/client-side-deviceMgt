@@ -1,7 +1,7 @@
 
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbPopover} from '@ng-bootstrap/ng-bootstrap';
 import {EditDeviceManagementModalComponent} from './modal/edit-deviceMgt-modal/edit-device-mgt-modal.component';
 import {InsertDeviceMgtModalComponent} from './modal/insert-device-mgt-modal/insert-device-mgt-modal.component';
 import {DeviceService} from '../../service/device.service';
@@ -114,10 +114,13 @@ export class DeviceManagementComponent implements OnInit {
   }
 
   // searching
-  filter(value) {
+  filter(value, pop) {
+    console.log(pop);
     if(this.search.device_sn || this.search.parent_clinic || this.search.status || this.search.location) {
       this.deviceService.postData(this.Api + '/deviceMgt/filter', value).subscribe( res => {
         this.deviceMgtData = res;
+        console.log('test');
+        pop.close();
       });
     }
   }

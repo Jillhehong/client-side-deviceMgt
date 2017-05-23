@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DeviceService} from '../../service/device.service';
 
-
 @Component({
   selector: 'app-customer-management',
   templateUrl: './customer-management.component.html',
@@ -10,6 +9,7 @@ import {DeviceService} from '../../service/device.service';
 export class CustomerManagementComponent implements OnInit {
   customerData: any;
   totalDevices: any;
+  panelState = [];
 
   constructor(private deviceService: DeviceService) { }
 
@@ -23,5 +23,8 @@ export class CustomerManagementComponent implements OnInit {
       this.totalDevices = counts;
     }, err => console.log(err));
   }
+  // accordionState(event, index) {
+  //   this.panelState[index] = event.nextState;
+  // }
 
 }

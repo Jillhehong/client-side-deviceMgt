@@ -5,28 +5,35 @@
     <tr>
       <th>NO.</th>
       <th>Clinic</th>
-      <th>Sub Clinic</th>
+      <!--<th>Sub Clinic</th>-->
       <th>Count of Devices</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let item of customerData; let i=index">
       <td>{{i+1}}</td>
-      <td class="customcss">{{item.parent_clinic}}</td>
-      <td class="customcss">{{item.sub_clinic}}</td>
+      <td class="customcss">
+        {{item.parent_clinic}}
+        <!--<ngb-accordion #acc="ngbAccordion" [type]="success">-->
+          <!--<ngb-panel>-->
+            <!--<ng-template ngbPanelTitle>-->
+              <!--<div><i class="fa fa-angle-down"></i>{{item.parent_clinic}}</div>-->
+            <!--</ng-template>-->
+            <!--<ng-template ngbPanelContent>-->
+              <!--test-->
+              <!--&lt;!&ndash;<p *ngFor="let device of item.device_sn">{{item.device_sn}}</p>&ndash;&gt;-->
+            <!--</ng-template>-->
+          <!--</ngb-panel>-->
+        <!--</ngb-accordion>-->
+      </td>
+      <!--<td class="customcss">{{item.sub_clinic}}</td>-->
       <td>{{item.totaldevices}}</td>
-      <!--<ngb-accordion #acc="ngbAccordion">-->
-        <!--<ngb-panel [title]="item.totalDevices">-->
-          <!--<ng-template ngbPanelContent>-->
-            <!--&lt;!&ndash;<p *ngFor="let device of item.device_sn">{{item.device_sn}}</p>&ndash;&gt;-->
-          <!--</ng-template>-->
-        <!--</ngb-panel>-->
-      <!--</ngb-accordion>-->
+
     </tr>
     <tr>
       <td></td>
       <td><strong>Grand Total</strong></td>
-      <td></td>
+      <!--<td></td>-->
       <td><strong>{{totalDevices}}</strong></td>
     </tr>
     </tbody>

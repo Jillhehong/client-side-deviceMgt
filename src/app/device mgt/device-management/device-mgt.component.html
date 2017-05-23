@@ -64,11 +64,11 @@
         </tr>
       </table>
       <br>
-      <button type="button" class="btn btn-default btn-sm " (click)="clearFilter()">Clear</button>
-      <button type="button" class="btn btn-primary btn-sm pull-right" (click)="filter(search)">Search</button>
+      <button type="button" class="btn btn-default btn-sm " (click)="clearFilter(); popover.close()">Clear</button>
+      <button type="button" class="btn btn-primary btn-sm pull-right" (click)="filter(search, popover)">Search</button>
     </ng-template>
 
-    <button type="button" class="btn btn-default btn-sm col-sm-1" [ngbPopover]="popContent" popoverTitle="Filters" placement="left">
+    <button type="button" class="btn btn-default btn-sm col-sm-1" [ngbPopover]="popContent" #popover="ngbPopover" popoverTitle="Filters" placement="left">
       Filter <span class="fa fa-sort-desc"></span></button>
   </div>
 
