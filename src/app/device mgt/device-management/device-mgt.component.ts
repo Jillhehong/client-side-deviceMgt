@@ -20,7 +20,7 @@ export class DeviceManagementComponent implements OnInit {
   sort = false;
   search = {device_sn: null, parent_clinic: null, status: null, location: null};
   options: object;
-  Api: string;
+  // Api: string;
   downloadUrl: string;
   RowsPerPage = 30;
   classTrueOrFalse = [];
@@ -29,13 +29,14 @@ export class DeviceManagementComponent implements OnInit {
   constructor(private modalService: NgbModal, private deviceService: DeviceService) {}
 
   ngOnInit() {
-    this.Api = this.deviceService.Api;
-    this.downloadUrl = this.Api + '/deviceMgt/download';
+    // this.Api = this.deviceService.Api;
+    this.downloadUrl =  '/deviceMgt/download';
     // data for smart-table
-    this.deviceService.getData(this.Api + '/deviceMgt/get').subscribe(response => {
+    this.deviceService.getData( '/deviceMgt/get').subscribe(response => {
+      console.log(response);
       this.deviceMgtData = response;
       this.classTrueOrFalse.push(false);
-    });
+    }, err => console.log(err));
 
     // select options
     this.options = this.deviceService.getDeviceMgtSelectOptions();
@@ -87,7 +88,7 @@ export class DeviceManagementComponent implements OnInit {
     console.log(this.selectedMgtData);
     this.modalService.open(content).result.then((res) => {
       console.log(res);
-      this.deviceService.postData(this.Api + '/deviceMgt/insert', this.selectedMgtData).subscribe(res => {
+      this.deviceService.postData( '/deviceMgt/insert', this.selectedMgtData).subscribe(res => {
         console.log(res);
         this.alert = {successMessage: true, type: 'success', message: 'insert success'};
       }, err => {
@@ -117,18 +118,18 @@ export class DeviceManagementComponent implements OnInit {
   filter(value, pop) {
     console.log(pop);
     if(this.search.device_sn || this.search.parent_clinic || this.search.status || this.search.location) {
-      this.deviceService.postData(this.Api + '/deviceMgt/filter', value).subscribe( res => {
+      this.deviceService.postData( '/deviceMgt/filter', value).subscribe( res => {
         this.deviceMgtData = res;
         console.log('test');
         pop.close();
-      });
+      }, err => console.log(err));
     }
   }
   clearFilter() {
     this.search = {device_sn: '', parent_clinic: '', status: '', location: ''};
-    this.deviceService.getData(this.Api + '/deviceMgt/get').subscribe(res => {
+    this.deviceService.getData( '/deviceMgt/get').subscribe(res => {
       this.deviceMgtData = res;
-    });
+    }, err => console.log(err));
   }
 
   sortString(string) {

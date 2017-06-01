@@ -10,11 +10,12 @@ export class CustomerManagementComponent implements OnInit {
   customerData: any;
   totalDevices: any;
   panelState = [];
+  test =0;
 
   constructor(private deviceService: DeviceService) { }
 
   ngOnInit() {
-    this.deviceService.getData(this.deviceService.Api + '/customerMgt/get').subscribe( res => {
+    this.deviceService.getData( '/customerMgt/get').subscribe( res => {
       this.customerData = res;
       let counts = 0;
       res.forEach( value => {
@@ -26,5 +27,12 @@ export class CustomerManagementComponent implements OnInit {
   // accordionState(event, index) {
   //   this.panelState[index] = event.nextState;
   // }
+
+  rightClick(event) {
+    console.log(event);
+    this.test ++;
+    return event.preventDefault();
+
+  }
 
 }

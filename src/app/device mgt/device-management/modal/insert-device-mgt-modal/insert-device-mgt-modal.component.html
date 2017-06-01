@@ -11,18 +11,18 @@
       <h5 class="text-success">Device Feature</h5>
       <div ><label >Device SN *</label>
         <input class="float-sm-right" type="text" [(ngModel)]="data.device_sn" name="device_sn" #device_sn="ngModel" required>
-        <div *ngIf="device_sn.errors?.required && device_sn.touched" class="form_msg text-right">Device SN is Required</div>
+        <div *ngIf="device_sn.errors.required && device_sn.touched" class="form_msg text-right">Device SN is Required</div>
       </div>
       <div ><label >status</label>
         <select class="float-sm-right" [(ngModel)]="data.status">
           <option value=""></option>
-          <option *ngFor="let s of options.status" [value]="s">{{s}}</option>
+          <option *ngFor="let s of options?.status" [value]="s">{{s}}</option>
         </select>
       </div>
       <div ><label >location</label>
         <select  [(ngModel)]="data.location" class="float-sm-right">
           <option value=""></option>
-          <option *ngFor="let location of options.location" [value]="location">{{location}}</option>
+          <option *ngFor="let location of options?.location" [value]="location">{{location}}</option>
         </select>
       </div>
       <div ><label >parent clinic</label>
@@ -34,7 +34,7 @@
       <div ><label >Checked out by</label>
         <select  [(ngModel)]="data.checked_out_by" class="float-sm-right">
           <option value=''></option>
-          <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
+          <option *ngFor="let m of options?.checked_by" [value]="m">{{m}}</option>
         </select>
       </div>
       <div >
@@ -45,7 +45,7 @@
       <div ><label >checked in by</label>
         <select  [(ngModel)]="data.checked_in_by" class="float-sm-right">
           <option value=""></option>
-          <option *ngFor="let m of options.checked_by" [value]="m">{{m}}</option>
+          <option *ngFor="let m of options?.checked_by" [value]="m">{{m}}</option>
         </select>
       </div>
       <div ><label >checked in date</label>
@@ -62,28 +62,28 @@
         <div ><label >points to</label>
           <select  [(ngModel)]="data.points_to" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.points_to" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.points_to" [value]="m">{{m}}</option>
           </select>
         </div>
         <div >
           <label >model description</label>
           <select  [(ngModel)]="data.model_description" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.model_description" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.model_description" [value]="m">{{m}}</option>
           </select>
         </div>
         <div>
           <label >manufacturer</label>
           <select  [(ngModel)]="data.manufacturer" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.manufacturer" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.manufacturer" [value]="m">{{m}}</option>
           </select>
         </div>
         <div>
           <label >firmware version</label>
           <select  [(ngModel)]="data.firmware_version" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.firmware_version" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.firmware_version" [value]="m">{{m}}</option>
           </select>
         </div>
         <div><label >zywie logo</label>
@@ -98,7 +98,7 @@
           <label>sim provider</label>
           <select  [(ngModel)]="data.sim_provider" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.sim_provider" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.sim_provider" [value]="m">{{m}}</option>
           </select>
         </div>
         <div><label>wyless provision_date</label>
@@ -107,7 +107,7 @@
         <div><label>use zywie sim</label>
           <select  [(ngModel)]="data.use_zywie_sim" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.yesOrNo" [value]="m">{{m}}</option>
           </select>
         </div>
       </div>
@@ -128,9 +128,9 @@
         <br>
         <h5 class="text-info">Lease</h5>
         <div><label>lease</label>
-          <select  [(ngModel)]="data.data" class="float-sm-right" class="float-sm-right">
+          <select  [(ngModel)]="data.lease" class="float-sm-right" class="float-sm-right">
             <option value=""></option>
-            <option *ngFor="let m of options.yesOrNo" [value]="m">{{m}}</option>
+            <option *ngFor="let m of options?.yesOrNo" [value]="m">{{m}}</option>
           </select>
         </div>
         <div><label>lease price per month</label><input class="float-sm-right"  type="text" [(ngModel)]="data.lease_price_per_month"></div>

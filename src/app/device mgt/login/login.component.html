@@ -1,11 +1,11 @@
 <div class="login-container">
   <div class="login-box">
-    <ngb-alert *ngIf="successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
+    <ngb-alert *ngIf="alert.successMessage" type="danger" dismissible="true" (close)="closeAlert()">{{alert.message}}</ngb-alert>
     <form #loginForm="ngForm">
       <div class="form-group row">
         <label for="email" class="col-sm-3 col-form-label">Email:</label>
         <div class="col-sm-9">
-          <input type="text" id="email" name='userEmail' class="form-control" [(ngModel)]="user.email"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          <input type="text" id="email" name='userEmail' class="form-control" [(ngModel)]="user.username"  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                  placeholder="email" required  #email="ngModel">
         </div>
       </div>

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class DeviceService {
-  Api: string = 'http://localhost:3000';
+  // Api: string = 'http://localhost:3000';
   private device_Mgt_table_columns: Array<string> = [
     'purchase_order',
     'registration_date',

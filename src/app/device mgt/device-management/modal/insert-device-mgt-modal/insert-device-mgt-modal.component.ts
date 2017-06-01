@@ -6,7 +6,6 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-// import {DatePipe} from '../../../../shared/date.pipe';
 
 @Component({
   selector: 'app-insert-device-mgt-modal',
@@ -15,11 +14,47 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 
 export class InsertDeviceMgtModalComponent implements OnInit {
-  options: object;
   error: string;
   parent_clinic =[];
   sub_clinic =[];
-  data = {};
+  options: any;
+  data ={};
+  // data = {
+  //   purchase_order: null,
+  //   registration_date: null,
+  //   device_sn: null,
+  //   iccid: null,
+  //   imei: null,
+  //   model_number: null,
+  //   model_description: null,
+  //   firmware_version: null,
+  //   manufacturer: null,
+  //   points_to: null,
+  //   use_zywie_sim: null,
+  //   sim_provider: null,
+  //   zywie_logo: null,
+  //   wyless_provision_date: null,
+  //   device_test_date: null,
+  //   device_suspension_date: null,
+  //   status: null,
+  //   location: null,
+  //   checked_out_by: null,
+  //   checked_out_date: null,
+  //   checked_in_by: null,
+  //   checked_in_date: null,
+  //   salesteam: null,
+  //   salesperson_name: null,
+  //   enterprise_id: null,
+  //   parent_clinic: null,
+  //   sub_clinic: null,
+  //   physician: null,
+  //   billable: null,
+  //   lease: null,
+  //   lease_price_per_month: null,
+  //   lease_start_date: null,
+  //   lease_end_date: null
+  // };
+
   styles = {checked_out_date: '',checked_in_date: '', wyless_provision_date: '', registration_date: '',
     device_test_date: '', device_suspension_date: '', lease_start_date: '', lease_end_date: ''};
   constructor(public activeModal: NgbActiveModal, private deviceService: DeviceService) {
@@ -32,20 +67,16 @@ export class InsertDeviceMgtModalComponent implements OnInit {
       this.data[value] = null;
     });
     // get parent clinic
-    this.deviceService.getData(this.deviceService.Api + '/deviceMgt/get/parent_clinic').subscribe(res => {
-      // this.parent_clinic = res;
+    this.deviceService.getData( '/deviceMgt/get/parent_clinic').subscribe(res => {
       res.forEach( value => {
-        // console.log('test');
         this.parent_clinic.push(value.parent_clinic);
       });
-      console.log('test');
-      console.log(this.parent_clinic);
 
     }, err => {
       console.log(err);
     });
     // get sub clinic
-    this.deviceService.getData(this.deviceService.Api + '/deviceMgt/get/sub_clinic').subscribe(res => {
+    this.deviceService.getData( '/deviceMgt/get/sub_clinic').subscribe(res => {
       // this.sub_clinic = res;
       res.forEach(value => {
         this.sub_clinic.push(value.sub_clinic);
@@ -55,15 +86,10 @@ export class InsertDeviceMgtModalComponent implements OnInit {
     });
   };
 
-
-  // searchSubClinic() {
-  //
-  // }
-
   insert(value) {
     console.log('test');
     console.log('test', value);
-    this.deviceService.postData(this.deviceService.Api + '/deviceMgt/insert', value)
+    this.deviceService.postData( '/deviceMgt/insert', value)
       .subscribe( res => {
         console.log('test ', res);
         this.activeModal.close();

@@ -25,14 +25,14 @@ export class EditDeviceManagementModalComponent implements OnInit {
   ngOnInit() {
     this.options = this.deviceService.getDeviceMgtSelectOptions();
     // get parent_clinic
-    this.deviceService.getData(this.deviceService.Api + '/deviceMgt/get/parent_clinic').subscribe( res => {
+    this.deviceService.getData( '/deviceMgt/get/parent_clinic').subscribe( res => {
       console.log('test');
       console.log(this.parent_clinic);
       res.forEach(value => this.parent_clinic.push(value.parent_clinic));
     }, res => console.log(res));
 
     //get sub clinic
-    this.deviceService.getData(this.deviceService.Api + '/deviceMgt/get/sub_clinic').subscribe( res => {
+    this.deviceService.getData( '/deviceMgt/get/sub_clinic').subscribe( res => {
       res.forEach(value => this.sub_clinic.push(value.sub_clinic));
     }, res => console.log(res));
   }
@@ -51,7 +51,7 @@ export class EditDeviceManagementModalComponent implements OnInit {
         console.log(value[key]);
       }
     });
-    this.deviceService.postData(this.deviceService.Api + '/deviceMgt/update', value)
+    this.deviceService.postData( '/deviceMgt/update', value)
       .subscribe( res => {
           console.log('test ', res);
         this.activeModal.close();

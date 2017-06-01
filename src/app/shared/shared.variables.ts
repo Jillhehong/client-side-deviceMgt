@@ -1,7 +1,7 @@
+
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SharedVariables {
-  selectedRowInDeviceHistory: object;
-  constructor() {}
+export class SharedVariables  {
+  public username: string = null;
 }

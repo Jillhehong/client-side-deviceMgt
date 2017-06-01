@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DeviceService} from '../../service/device.service';
 
 @Component({
   selector: 'app-signup',
@@ -6,23 +7,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  // url = 'http://localhost:3000';
   submitted = false;
   // alert msg
-  successMessage = true;
-  alert = {message: null};
-  user = {firstName: null, lastName: null, email: null, pwd: null, pwd2: null};
+  alert = {successMessage: false, message: null};
+  user = {first_name: null, last_name: null, email: null, password: null, password2: null};
   closeAlert() {
-    this.successMessage = false;
+    this.alert.successMessage = false;
   }
-  // submit sign up form
-  submit(user) {
-    if (user.pwd !== user.pwd2) {
-      this.alert.message = 'passwords are not the same';
-    }
-  }
-  constructor() { }
+  constructor(private deviceService: DeviceService) { }
 
   ngOnInit() {
   }
+// submit sign up form
+submit(user) {
+  if (user.password !== user.password2) {
+    console.log('test');
+    this.alert = {successMessage: true, message: 'passwords are not the same'};
+  } else {
+    console.log(user);
+    this.deviceService.postData('/addNewUsers', user).subscribe( res=> {
+      console.log(res);
+      this.submitted = true;
+    }, err => {
+      console.log(err);
+      this.alert = {successMessage: true, message: err};
+    });
+
+  }
+}
 
 }

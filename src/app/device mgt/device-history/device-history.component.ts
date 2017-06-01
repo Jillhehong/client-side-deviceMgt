@@ -21,9 +21,9 @@ export class DeviceHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.deviceService.getData(this.deviceService.Api + '/deviceHistory/get').subscribe(res => {
+    this.deviceService.getData( '/deviceHistory/get').subscribe(res => {
       this.deviceHistoryData = res;
-    });
+    }, err => console.log(err));
   }
 
   // search by item
@@ -32,7 +32,7 @@ export class DeviceHistoryComponent implements OnInit {
     obj[value.searchBy] =  value.searchValue;
     console.log(obj);
 
-    this.deviceService.postData(this.deviceService.Api + '/deviceHistory/search', obj).subscribe( res => {
+    this.deviceService.postData( '/deviceHistory/search', obj).subscribe( res => {
       this.deviceHistoryData = res;
     }, err => console.log(err));
   }
@@ -51,7 +51,7 @@ export class DeviceHistoryComponent implements OnInit {
   // open modal for delete
   delete(content) {
     this.modalService.open(content).result.then((result) => {
-      this.deviceService.postData(this.deviceService.Api + '/deviceHistory/delete', result).subscribe( res => {
+      this.deviceService.postData( '/deviceHistory/delete', result).subscribe( res => {
         console.log(res);
         this.alert = {successMessage: true, type: 'success', message: 'delete success'};
       }, err => {

@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { UIRouterModule } from '@uirouter/angular';  // import ui-router
+// import {Injector} from '@angular/core';
+import { UIRouterModule, StateService, UIRouter } from '@uirouter/angular';  // import ui-router
 import { AppComponent } from './app.component';
 import { DeviceManagementComponent } from './device mgt/device-management/device-mgt.component';
 import { DeviceHistoryComponent } from './device mgt/device-history/device-history.component';
@@ -18,19 +19,18 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; // import ng-bootstrap
 import { PublicComponent } from './device mgt/public/public.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table'; // import ng2-smart-table
 import { EditDeviceManagementModalComponent } from './device mgt/device-management/modal/edit-deviceMgt-modal/edit-device-mgt-modal.component';
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import {NgxPaginationModule} from 'ngx-pagination'; // import the module
 import { InsertDeviceMgtModalComponent } from './device mgt/device-management/modal/insert-device-mgt-modal/insert-device-mgt-modal.component';
-import { TestComponent } from './test/test.component';
 import {EditDeviceHistoryComponent} from './device mgt/device-history/edit/edit.modal';
 import {InsertDeviceHistoryComponent} from './device mgt/device-history/insert/insert.modal';
-import {SharedVariables} from "./shared/shared.variables";
 import {Location} from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
+import { SharedVariables } from './shared/shared.variables';
+import {uiRouterConfigFn} from "./shared/uiRouter.config"; // import config ui-router
 
 
-// import { TypeaheadModule  } from 'ngx-bootstrap';
-
-const routes = { states: [
+let routes = {
+  states: [
   { name: 'public', abstract: true, component: PublicComponent},
   { name: 'public.home', url: '/home',  component: HomepageComponent },
   { name: 'public.dashboard', url: '/dashboard',  component: DashboardComponent },
@@ -43,15 +43,9 @@ const routes = { states: [
   { name: 'public.customerManagement', url: '/customerManagement',  component: CustomerManagementComponent },
   { name: 'login', url: '/login', component: LoginComponent},
   { name: 'signup', url: '/signup',  component: SignupComponent }
-
-]};
-//
-// /** UIRouter Config  */
-// export function uiRouterConfigFn(router: UIRouter) {
-//   // If no URL matches, go to the `hello` state by default
-//   router.urlService.rules.otherwise({ state: 'home' });
-//
-// }
+  ],
+  config: uiRouterConfigFn
+};
 
 @NgModule({
   declarations: [
@@ -67,10 +61,9 @@ const routes = { states: [
     HomepageComponent,
     PublicComponent,
     EditDeviceManagementModalComponent,
-    InsertDeviceMgtModalComponent,
-    TestComponent,
     EditDeviceHistoryComponent,
-    InsertDeviceHistoryComponent
+    InsertDeviceHistoryComponent,
+    InsertDeviceMgtModalComponent
   ],
   imports: [
     BrowserModule,
@@ -80,8 +73,8 @@ const routes = { states: [
     NgxPaginationModule,
     ChartsModule,
     UIRouterModule.forRoot(routes),
+    // RouterModule.forRoot([]),
     NgbModule.forRoot()
-    // TypeaheadModule.forRoot()
   ],
   entryComponents: [
     EditDeviceManagementModalComponent,

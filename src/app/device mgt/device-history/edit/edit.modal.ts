@@ -23,7 +23,7 @@ export class EditDeviceHistoryComponent implements OnInit {
   ngOnInit() {
     this.options = this.deviceService.getDeviceHistorySelectOptions();
     // get device owner
-    this.deviceService.getData(this.deviceService.Api + '/deviceHistory/get/deviceOwner').subscribe( res => {
+    this.deviceService.getData( '/deviceHistory/get/deviceOwner').subscribe( res => {
       res.forEach( value => {
         this.deviceOwner.push(value.device_owner);
       });
@@ -46,7 +46,7 @@ export class EditDeviceHistoryComponent implements OnInit {
           value[key] = null;
         }
       });
-      this.deviceService.postData(this.deviceService.Api + '/deviceHistory/update', value).subscribe( res => {
+      this.deviceService.postData( '/deviceHistory/update', value).subscribe( res => {
         this.activeModal.close();
       }, err => {
         this.error = err;

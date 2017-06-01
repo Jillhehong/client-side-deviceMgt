@@ -18,7 +18,7 @@ export class DeviceInventoryComponent implements OnInit {
     this.deviceService.getData('assets/deviceInventory.json').subscribe( res => {
       this.data = res;
       this.source = new LocalDataSource(this.data); // create the source
-    });
+    }, err => console.log(err));
     // setting variable
     const columns = this.deviceService.getDeviceInventoryColumns();
     columns.forEach( item => {

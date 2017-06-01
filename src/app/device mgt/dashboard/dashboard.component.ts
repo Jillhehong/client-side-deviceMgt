@@ -123,23 +123,23 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // get billable devices
-    this.deviceService.getData(this.deviceService.Api + '/dashboard/billable').subscribe( res => {
+    this.deviceService.getData( '/dashboard/billable').subscribe( res => {
       res.forEach( value => {
         this.billable.labels.push(value.billable);
         this.billable.datasets[0].data.push(Number(value.count));
       });
       this.billable.isDataAvailable = true;
-    });
+    }, err => console.log(err));
     // get status
-    this.deviceService.getData(this.deviceService.Api + '/dashboard/status').subscribe( res => {
+    this.deviceService.getData( '/dashboard/status').subscribe( res => {
       res.forEach( value => {
         this.status.labels.push(value.status);
         this.status.datasets[0].data.push(Number(value.count));
       });
       this.status.isDataAvailable = true;
-    });
+    }, err => console.log(err));
     // get location
-    this.deviceService.getData(this.deviceService.Api + '/dashboard/location').subscribe( res => {
+    this.deviceService.getData( '/dashboard/location').subscribe( res => {
       let deviceCounts = 0; // count total available devices
       res.forEach( value => {
         // count
@@ -154,9 +154,9 @@ export class DashboardComponent implements OnInit {
       console.log(deviceCounts);
       this.totalAvailableDevices = deviceCounts;
       this.location.isDataAvailable = true;
-    });
+    }, err => console.log(err));
     // get purchase order
-    this.deviceService.getData(this.deviceService.Api + '/dashboard/purchaseOrder').subscribe( res => {
+    this.deviceService.getData( '/dashboard/purchaseOrder').subscribe( res => {
       // populate data for bar chart
       let orderQty = {data: [], label: 'orderQty'};
       let receivedQty = {data: [], label: 'receivedQty'};
@@ -172,13 +172,13 @@ export class DashboardComponent implements OnInit {
       this.purchaseOrder.datasets = [orderQty, receivedQty, deficiencyQty];
       // set true when finished async data
       this.purchaseOrder.isDataAvailable = true;
-    });
+    }, err => console.log(err));
    //get total order per received, deficiency
-    this.deviceService.getData(this.deviceService.Api + '/dashboard/orderSummary').subscribe( res => {
+    this.deviceService.getData( '/dashboard/orderSummary').subscribe( res => {
       this.orders.total_ordered_qty = res[0].total_ordered_qty;
       this.orders.total_received_qty= res[0].total_received_qty;
       this.orders.total_deficiency_qty = res[0].total_deficiency_qty;
-    });
+    }, err => console.log(err));
   }
 
 }
